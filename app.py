@@ -4,7 +4,7 @@ from flask import Flask, render_template, request
 from sklearn.preprocessing import StandardScaler
 
 app = Flask(__name__)
-model = pickle.load(open('random_forest_regression_mod.pkl', 'rb'))
+model = pickle.load(open('Linear_regression_mod.pkl', 'rb'))
 
 
 @app.route('/', methods=['GET'])
