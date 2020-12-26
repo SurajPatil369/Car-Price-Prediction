@@ -2,6 +2,8 @@ import pickle
 import numpy as np
 from flask import Flask, render_template, request
 from sklearn.preprocessing import StandardScaler
+import logging
+import sys
 
 app = Flask(__name__)
 model = pickle.load(open('Linear_regression_mod.pkl', 'rb'))
@@ -61,4 +63,7 @@ def predict():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False
+           )
+    app.logger.addHandler(logging.StreamHandler(sys.stdout))
+    app.logger.setLevel(logging.ERROR)
