@@ -2,8 +2,6 @@ import pickle
 import numpy as np
 from flask import Flask, render_template, request
 from sklearn.preprocessing import StandardScaler
-import logging
-import sys
 
 app = Flask(__name__)
 model = pickle.load(open('Linear_regression_mod.pkl', 'rb'))
@@ -31,7 +29,7 @@ def predict():
         if (Fuel_Type_Petrol == 'Petrol'):
             Fuel_Type_Petrol = 1
             Fuel_Type_Diesel = 0
-        elif Fuel_Type_Petrol == 'Diezel':
+        elif Fuel_Type_Petrol == 'Diesel':
 
             Fuel_Type_Petrol = 0
             Fuel_Type_Diesel = 1
@@ -57,12 +55,11 @@ def predict():
         if output < 0:
             return render_template('index1.html', prediction_texts="Sorry you cannot sell this car")
         else:
-            return render_template('index1.html', prediction_text="You Can Sell The Car at {}".format(output))
+            return render_template('index1.html', prediction_text="You Can Sell The Car at {} Lakh".format(output))
     else:
         return render_template('index1.html')
 
 
 if __name__ == "__main__":
     app.run(debug=True)
-    app.logger.addHandler(logging.StreamHandler(sys.stdout))
-    app.logger.setLevel(logging.ERROR)
+   
